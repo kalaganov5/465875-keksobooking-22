@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Володя Калаганов](https://up.htmlacademy.ru/javascript/22/user/465875).
-* Наставник: `Неизвестно`.
+* Наставник: [Никита Победоносцев](https://htmlacademy.ru/profile/nikkypizza).
 
 ---
 
