@@ -3,45 +3,30 @@
 // Формула взята на: https://learn.javascript.ru/task/random-int-min-max
 // Generate random number
 const getRandomNumber = function (numberMin, numberMax) {
-  return Math.floor(numberMin + Math.random() * (numberMax + 1 - numberMin));
+  return numberMin + Math.random() * (numberMax + 1 - numberMin);
 }
 
-// Generate random integer
-const getRandomInteger = function (min, max) {
-  let randomNumber;
-  if(min < max) {
-    randomNumber = getRandomNumber(min, max);
-  }
-
+// Generate random whole number
+const getRandomWholeNumber = function (min, max) {
   if(min >= max || min < 0) {
-    randomNumber = alert('Неправильный диапазон! Укажите любые числа от 0, чтобы первое было меньше второго.');
+    throw new Error('getRandomWholeNumber — что пошло не так');
   }
-
-  return randomNumber;
+  return Math.floor(getRandomNumber(min, max));
 }
 
 // Generate random number with floating point
-const getRandomNotInteger = function (min, max, symbolsAfterPoint) {
-  let randomNumber;
+const getRandomFractionalNumber = function (min, max, symbolsAfterPoint) {
   if(min >= max || min < 0) {
-    randomNumber = alert('Неправильный диапазон! Укажите любые числа от 0, чтобы первое было меньше второго и символов после запятой. Пример (1, 9, 3)');
+    throw new Error('getRandomFractionalNumber — Неправильный диапазон! Укажите любые числа от 0, чтобы первое было меньше второго и символов после запятой. Пример (1, 9, 3)');
   }
 
-  if(min < max) {
-    randomNumber = getRandomNumber(min, max);
-    let floatingPointNumber;
-    let factor = 10;
-    for(let i = 1; i <= symbolsAfterPoint; i++) {
-      floatingPointNumber = getRandomNumber(1, 9);
-      floatingPointNumber = floatingPointNumber / factor;
-      factor = factor * 10;
-      randomNumber = randomNumber + floatingPointNumber;
-    }
+  let randomNumber = (getRandomNumber(min, max)).toFixed(symbolsAfterPoint);
+  // If the number is fractional and ends in 0
+  if(randomNumber.slice(-1) === '0' && ((randomNumber ^ 0) === randomNumber) === false) {
+    randomNumber = randomNumber.substring(0, randomNumber.length - 1) + getRandomWholeNumber(1, 9) + randomNumber.substring(1 + randomNumber.length - 1);
   }
-
-  randomNumber = Number(randomNumber.toFixed(symbolsAfterPoint));
-  return randomNumber;
+  return Number(randomNumber);
 }
 
-getRandomInteger(1, 9);
-getRandomNotInteger(1, 9, 13);
+getRandomWholeNumber(0, 1);
+getRandomFractionalNumber(0, 2, 1);
