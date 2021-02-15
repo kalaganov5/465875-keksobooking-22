@@ -1,3 +1,3 @@
-import {offersArray} from './offer-array.js';
+import {offersArray} from './data.js';
 
 offersArray;

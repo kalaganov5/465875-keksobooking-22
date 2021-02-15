@@ -1,4 +1,4 @@
-import {getRandomWholeNumber, getRandomFractionalNumber} from './get-random-number.js';
+import {getRandomWholeNumber, getRandomFractionalNumber} from './util.js';
 
 const HOUSE_TYPES = [
   'palace',
