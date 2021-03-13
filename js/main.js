@@ -1,3 +1,3 @@
-import {offersArray} from './data.js';
+import {map, similarAdsFragment} from './similar-ads.js';
 
-offersArray;
+map.append(similarAdsFragment.childNodes[0])

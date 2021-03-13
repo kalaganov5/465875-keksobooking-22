@@ -26,4 +26,10 @@ const getRandomFractionalNumber = function (min, max, symbolsAfterPoint) {
   return +randomNumber;
 };
 
-export {getRandomWholeNumber, getRandomFractionalNumber};
+const createElementWithClass = (type ,className) => {
+  const elementItem = document.createElement(type);
+  elementItem.classList.add(className);
+  return elementItem;
+}
+
+export {getRandomWholeNumber, getRandomFractionalNumber, createElementWithClass};
