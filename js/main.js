@@ -1,3 +1,3 @@
-import {map, similarAdsFragment} from './similar-ads.js';
+import {map, similarAdsFragment} from './card.js';
 
 map.append(similarAdsFragment.childNodes[0])
