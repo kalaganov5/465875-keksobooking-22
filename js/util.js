@@ -26,4 +26,22 @@ const getRandomFractionalNumber = function (min, max, symbolsAfterPoint) {
   return +randomNumber;
 };
 
-export {getRandomWholeNumber, getRandomFractionalNumber};
+const createElementWithClass = (type, className) => {
+  const elementItem = document.createElement(type);
+  // add any class from https://k49.ru/7fizy
+  DOMTokenList.prototype.addMany = function(classes) {
+    let array = classes.split(' ');
+    for (let i = 0; i < array.length; i++) {
+      this.add(array[i]);
+    }
+  };
+  elementItem.classList.addMany(className);
+  return elementItem;
+}
+
+const getDeclension = (number, titlesArr) => {
+  const cases = [2, 0, 1, 1, 1, 2];
+  return titlesArr[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+};
+
+export {getRandomWholeNumber, getRandomFractionalNumber, createElementWithClass, getDeclension};
