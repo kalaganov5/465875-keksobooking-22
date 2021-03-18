@@ -20,11 +20,7 @@ offersArray.forEach(function (currentValue) {
   item.querySelector('.popup__title').textContent = currentValue.offer.title;
   item.querySelector('.popup__text--address').textContent = currentValue.offer.address;
   item.querySelector('.popup__text--price').textContent = `${currentValue.offer.price} ₽/ночь`;
-  for(let room in ROOM_TYPES) {
-    if(Object.prototype.hasOwnProperty.call(ROOM_TYPES, room) && room === currentValue.offer.type) {
-      item.querySelector('.popup__type').textContent  = ROOM_TYPES[room];
-    }
-  }
+  item.querySelector('.popup__type').textContent = ROOM_TYPES[currentValue.offer.type];
   item.querySelector('.popup__text--capacity').textContent = `${currentValue.offer.rooms} ${getDeclension(currentValue.offer.rooms, ['комната', 'комнаты', 'комнат'])} для ${currentValue.offer.guests} ${getDeclension(currentValue.offer.guests, ['гость', 'гостя', 'гостей'])}`;
   item.querySelector('.popup__text--time').textContent = `Заезд после ${currentValue.offer.checkin}, выезд до ${currentValue.offer.checkout}`;
   // clear child element before insert features
