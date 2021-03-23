@@ -1,42 +1,33 @@
-const adForm = document.querySelector('.ad-form');
-const adHouseType = adForm.querySelector('#type');
-const adPrice = adForm.querySelector('#price');
-const adTimes = adForm.querySelectorAll('.ad-form__element--time select');
+import {ROOM_TYPES} from './data.js';
+const form = document.querySelector('.ad-form');
 
-const ROOM_PRICE = {
-  palace: 10000,
-  flat: 1000,
-  house: 5000,
-  bungalow: 0,
-};
-let currentMinPriceHouse = ROOM_PRICE[adHouseType.value];
-
-const setMinPriceHouse = function (value) {
-  adPrice.setAttribute('min-value', value);
-  adPrice.placeholder = value;
+const validatePriceInput = function (value) {
+  form.price.min = value;
+  form.price.placeholder = value;
 }
 
-setMinPriceHouse(currentMinPriceHouse);
-
-const adFormHandler = function (evt) {
-  if (evt.target && evt.target.matches('select[id="type"]')) {
-    // Решение взято с https://up.htmlacademy.ru/javascript/22/demos/4889#7,
-    // но не пойму, зачем условие "evt.target", без него на втором примере работает
-    currentMinPriceHouse = ROOM_PRICE[adHouseType.value];
-    setMinPriceHouse(currentMinPriceHouse);
-  }
-  if (evt.target.matches('select[id="timein"]') || evt.target.matches('select[id="timeout"]')) {
-    for (let optionElement of evt.target.children) {
-      if (optionElement.selected) {
-        let optionValue = optionElement.value;
-        for (let i = 0; i < adTimes.length; i++) {
-          adTimes[i].value = optionValue;
-        }
-      }
+const formHandler = function (evt) {
+  switch (evt.target) {
+    case form.timein:
+    case form.timeout:
+      validateTimeSelects(evt)
+      break;
+    case form.type: {
+      validatePriceInput(ROOM_TYPES[form.type.value].minPrice);
+      break;
     }
   }
 }
 
-adForm.addEventListener('change', adFormHandler);
+const validateTimeSelects = function (evt) {
+  if (evt.target === form.timein) {
+    form.timeout.value = form.timein.value;
+  }
+  else {
+    form.timein.value = form.timeout.value;
+  }
+};
 
-export {adFormHandler};
+form.addEventListener('change', formHandler);
+
+export {formHandler};

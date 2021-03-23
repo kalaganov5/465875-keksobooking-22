@@ -1,7 +1,7 @@
 import {map, similarAdsFragment} from './card.js';
-import {adFormHandler} from './handler-form.js';
+import {formHandler} from './handler-form.js';
 
-adFormHandler;
+formHandler;
 
 map.append(similarAdsFragment.childNodes[0])
 
