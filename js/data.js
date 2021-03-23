@@ -1,11 +1,23 @@
 import {getRandomWholeNumber, getRandomFractionalNumber} from './util.js';
 
-const HOUSE_TYPES = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-];
+const ROOM_TYPES = {
+  palace: {
+    name: 'Дворец',
+    minPrice: 10000,
+  },
+  flat: {
+    name: 'Квартира',
+    minPrice: 1000,
+  },
+  house: {
+    name: 'Дом',
+    minPrice: 5000,
+  },
+  bungalow: {
+    name: 'Бунгало',
+    minPrice: 0,
+  },
+};
 
 const CHECKIN_TIMES = [
   '12:00',
@@ -60,7 +72,7 @@ const createOffersArray = () => {
       title: getRandomArrayElement(HOUSE_DESCRIPTIONS),
       address: `${getRandomFractionalNumber(35.65, 35.7, 5)}, ${getRandomFractionalNumber(139.7, 139.8, 5)}`,
       price: getRandomWholeNumber(1000, 10000),
-      type: getRandomArrayElement(HOUSE_TYPES),
+      type: getRandomArrayElement(Object.keys(ROOM_TYPES)),
       rooms: getRandomWholeNumber(1, 10),
       guests: getRandomWholeNumber(1, 30),
       checkin: getRandomArrayElement(CHECKIN_TIMES),
@@ -78,4 +90,4 @@ const createOffersArray = () => {
 
 const offersArray = new Array(10).fill(null).map(() => createOffersArray());
 
-export {offersArray};
+export {offersArray, ROOM_TYPES};

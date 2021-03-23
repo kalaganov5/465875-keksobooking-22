@@ -26,16 +26,9 @@ const getRandomFractionalNumber = function (min, max, symbolsAfterPoint) {
   return +randomNumber;
 };
 
-const createElementWithClass = (type, className) => {
+const createElementWithClass = (type, classes) => {
   const elementItem = document.createElement(type);
-  // add any class from https://k49.ru/7fizy
-  DOMTokenList.prototype.addMany = function(classes) {
-    let array = classes.split(' ');
-    for (let i = 0; i < array.length; i++) {
-      this.add(array[i]);
-    }
-  };
-  elementItem.classList.addMany(className);
+  elementItem.className = classes;
   return elementItem;
 }
 
